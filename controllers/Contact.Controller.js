@@ -9,7 +9,7 @@ const ContactController={
             res.status(200).json({status:200,message:"created contact",data:item})
         })
 
-    },
+    },  
     read: function (req,res){
         ContactModel.find({},function(err,items){
             if(err){

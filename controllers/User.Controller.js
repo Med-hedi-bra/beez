@@ -8,7 +8,7 @@ const tokenList= []
 
 
 const UserController = {
-
+    
 
 
     authenticate: function (req, res, next) {
