@@ -1,6 +1,6 @@
 const WarningModel = require("../models/Warning.Model");
 const accountSid = "AC87e829858e929d1532403d4e1fbff986";
-const authToken = "659799d34c8b6eb4315911c1640e1f43";
+const authToken = "20eb5408a17e0c9452c636929708c3bd";
 const client = require("twilio")(accountSid, authToken);
 
 const WarningController = {
@@ -20,12 +20,15 @@ const WarningController = {
 
       client.messages
         .create({
-          body: "\nHello \nWe are the team of BEEZ and we inform you that you can be attacked by Hornets in "+req.body.location+"\nYou can prevent this attack by visiting our site in order to help you",
+          body:
+            "\nHello \nWe are the team of BEEZ and we inform you that you can be attacked by Hornets in " +
+            req.body.location +
+            "\nYou can prevent this attack by visiting our site in order to help you",
           from: "+15619834439", // replace with your Twilio phone number
           to: req.body.phone, // replace with the recipient's phone number
-        })            
+        })
         .then((message) => console.log(message.sid))
-        .catch((error) => console.error(error));    
+        .catch((error) => console.error(error));
     });
   },
   read: function (req, res) {
@@ -88,11 +91,12 @@ const WarningController = {
   },
   //here is a problem
   getTheLast: function (req, res) {
-    WarningModel.find()
-      .sort({ _id: -1 })
-      .limit(1)
-      .then((item) => res.status(201).json({ data: item }))
-      .catch((err) => res.status(404).json({ mesa: err }));
+    WarningModel.findOne({}, function (err, item) {
+      if (err) {
+        res.json(err);  
+      }
+      res.json(item);  
+    });
   },
 };
 

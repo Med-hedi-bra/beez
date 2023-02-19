@@ -5,13 +5,11 @@ const CustomerController = {
     req.body["photo"] = req.file.filename;
     CustomerModel.create(req.body, function (err, item) {
       if (err) {
-        res
-          .status(406)
-          .json({
-            status: 406,
-            message: "Customer not created" + err,
-            data: null,
-          });
+        res.status(406).json({
+          status: 406,
+          message: "Customer not created" + err,
+          data: null,
+        });
       }
       res
         .status(200)
@@ -46,13 +44,11 @@ const CustomerController = {
       { new: true },
       function (err, item) {
         if (err) {
-          res
-            .status(406)
-            .json({
-              status: 406,
-              message: "Customer not created" + err,
-              data: null,
-            });
+          res.status(406).json({
+            status: 406,
+            message: "Customer not created" + err,
+            data: null,
+          });
         } else
           res
             .status(200)

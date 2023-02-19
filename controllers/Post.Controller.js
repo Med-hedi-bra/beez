@@ -47,6 +47,7 @@ const PostController = {
 
   addPost: function (req, res) {
     console.log(req.body);
+    req.body["photo"] = req.file.filename;
     PostModel.create(req.body, async function (err, post) {
       if (err) {
         res.status(406).json({
@@ -66,10 +67,9 @@ const PostController = {
           .json({ status: 406, message: "Subject not found", data: null });
       }
       res
-        .status(200)  
+        .status(200)
         .json({ status: 200, message: "created Post", data: post });
     });
   },
-};   
+};
 module.exports = PostController;
-          
